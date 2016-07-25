@@ -2,24 +2,22 @@ source: app
 destination: app/_site
 
 # Site settings
-title: Jekyll Polymer Theme
-subtitle: Google material design for static sites
-description: > # this means to ignore newlines until "baseurl:"
-  This is a material design theme for Polymer using Google's Polymer library. It's still an early draft, so be nice.
+title: BrandonSilver.com
+subtitle: The website and blog of Brandon Silver, software developer.
+description: > # this means to ignore newlines until the next configuration directive.
+  A web-based log (``blog'') of the projects and studies of Brandon Silver.
 
-author: Julia Ebert
-author_website: http://juliaebert.com
-email: julia@juliaebert.com
+author: Brandon Silver
+author_website: https://www.brandonsilver.com
+email: brandon@brandonsilver.com
 
-baseurl: "/jekyll-polymer"  # Subpath of your site, e.g. /blog. For deploying to github pages, this should match your repo name
-                            # Currently `gulp serve:dist` does not work with a baseurl specified. For this purpose,
-                            # temporarily comment out this parameter
-url: "http://juliaebert.com"  # Base hostname & protocol for your site
+baseurl: "/testing" # the subpath of your site, e.g. /blog. For deploying to github pages, this should match your repo name
+url: "https://www.brandonsilver.com" # the base hostname & protocol for your site
 
-twitter_username: ''
-github_username:  jtebert
-disqus_shortname: juliaebert
-google_analytics: UA-54476418-1
+twitter_username: 'alinuxuser'
+github_username:  brandonsilver
+disqus_shortname: brandonsilver
+#google_analytics: UA-54476418-1
 
 # Pagination
 paginate: 5
