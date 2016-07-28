@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 // Include Gulp & tools we'll use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var crisper = require('gulp-crisper');
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
@@ -238,11 +239,9 @@ gulp.task('vulcanize', function() {
       inlineCss: true,
       inlineScripts: true
     }))
-    .pipe(htmlmin({
-      collapseWhitespace: true,
-      conservativeCollapse: true,
-      minifyJS: true,
-      minifyCSS: true
+    .pipe(crisper({
+      scriptInHead: false, // default is true
+      onlySplit: false
     }))
     .pipe(gulp.dest(dist('elements')))
     .pipe($.size({title: 'vulcanize'}));
