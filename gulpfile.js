@@ -366,7 +366,9 @@ gulp.task('jekyllbuild', function(done) {
 
 gulp.task('deploy-web-host', function(done) {
   // TODO change rsync destination path below when finished testing.
-  var rsync = spawn('rsync', ['-zvr', '-e', 'ssh', DIST+'/', 'bsilver:/home/public/testing/'], { stdio: 'inherit' })
+  var copySource = DIST + '/';
+  var copyDestination = 'bsilver:/home/public/testing/';
+  var rsync = spawn('rsync', ['-zvr', '-e', 'ssh', copySource, copyDestination], { stdio: 'inherit' })
       .on('close', done);
   rsync.on('exit', function(code) {
     gulpCallBack(code === 0 ? null : 'ERROR: rsync process exited with code: '+code);

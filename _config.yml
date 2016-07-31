@@ -6,9 +6,8 @@ title: BrandonSilver.com
 subtitle: The website and blog of Brandon Silver, software developer.
 description: > # this means to ignore newlines until the next configuration directive.
   A web-based log (``blog'') of the projects and studies of Brandon Silver.
-
 author: Brandon Silver
-author_website: https://www.brandonsilver.com
+#author_website: https://www.brandonsilver.com
 email: brandon@brandonsilver.com
 
 baseurl: "/testing" # the subpath of your site, e.g. /blog. For deploying to github pages, this should match your repo name
@@ -31,7 +30,7 @@ gems:
 
 # Build settings
 markdown: kramdown
-permalink: /:categories/:year/:month/:day/:title/
+permalink: /:categories/:year/:month/:day/:title.html
 
 # Archive settings
 jekyll-archives:
