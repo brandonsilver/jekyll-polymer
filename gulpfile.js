@@ -25,6 +25,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var ensureFiles = require('./tasks/ensure-files.js');
+var htmlmin = require('gulp-htmlmin');
 
 var spawn = require('child_process').spawn;
 var argv = require('yargs').argv;
@@ -147,6 +148,17 @@ var optimizeScriptsTask = function(src, dest) {
       }));
 };
 
+gulp.task('minify-html-js-css', function() {
+  return gulp.src(DIST+'**/*')
+    .pipe(htmlmin({
+      collapseWhitespace: true,
+      conservativeCollapse: true,
+      minifyJS: true,
+      minifyCSS: true
+    }))
+    .pipe(gulp.dest(DIST))
+})
+
 gulp.task('scripts', function() {
   // Copy web fonts to dist
   gulp.task('fonts', function() {
@@ -238,6 +250,12 @@ gulp.task('vulcanize', function() {
       stripComments: true,
       inlineCss: true,
       inlineScripts: true
+    }))
+    .pipe(htmlmin({
+      collapseWhitespace: true,
+      conservativeCollapse: true,
+      minifyJS: true,
+      minifyCSS: true
     }))
     .pipe(crisper({
       scriptInHead: false, // default is true
