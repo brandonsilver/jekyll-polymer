@@ -49,8 +49,10 @@ var AUTOPREFIXER_BROWSERS = [
 
 // Source and destination directories
 var DIST = 'dist';
+var APP = 'app';
 var SRC = 'app/_site';
 var NOTSRC = '!app/_site';
+var BASIC = 'basic';
 
 var notsrc = function(subpath) {
   return !subpath ? NOTSRC : path.join(DIST, subpath);
@@ -62,6 +64,13 @@ var src = function(subpath) {
 
 var dist = function(subpath) {
   return !subpath ? DIST : path.join(DIST, subpath);
+};
+
+var app = function(subpath) {
+  return !subpath ? APP : path.join(APP, subpath);
+}
+var basic = function(subpath) {
+  return !subpath ? BASIC : path.join(BASIC, subpath);
 };
 
 var styleTask = function(stylesPath, srcs) {
@@ -212,7 +221,10 @@ gulp.task('copy', function() {
     dot: true
   }).pipe(gulp.dest(dist()));
 
-    var media = gulp.src([src('media/**/*')]).pipe(gulp.dest(dist('media')));
+  var media = gulp.src([src('media/**/*')]).pipe(gulp.dest(dist('media')));
+
+  // copy the basic CSS (isn't being copied over automatically (???))
+  var basicCss = gulp.src([src('basic/css/*')]).pipe(gulp.dest(dist('basic/css/')));
 
   // Copy over only the bower_components we need
   // These are things which cannot be vulcanized
@@ -382,10 +394,26 @@ gulp.task('jekyllbuild', function(done) {
   return jekyll
 });
 
+gulp.task('basicjekyllbuild', function(done) {
+  // copy desired files (raw posts, pages) to basic/
+  var basic_raw = gulp.src(app('_posts/**.*')).pipe(gulp.dest(basic('_posts')));
+
+  process.chdir('basic');
+  var jekyll = spawn('bundle', ['exec', 'jekyll', 'build'], { stdio: 'inherit' })
+      .on('close', done);
+  jekyll.on('exit', function(code) {
+    gulpCallBack(code === 0 ? null : 'ERROR: Basic Jekyll process exited with code: '+code);
+  });
+  // TODO do we need to chdir back at the end of the task?
+  process.chdir('..');
+
+  var basic_build = gulp.src(basic('_site/**/**.*')).pipe(gulp.dest(src('basic')));
+  return jekyll
+})
+
 gulp.task('deploy-web-host', function(done) {
-  // TODO change rsync destination path below when finished testing.
   var copySource = DIST + '/';
-  var copyDestination = 'bsilver:/home/public/testing/';
+  var copyDestination = 'bsilver:/home/public/';
   var rsync = spawn('rsync', ['-zvr', '-e', 'ssh', copySource, copyDestination], { stdio: 'inherit' })
       .on('close', done);
   rsync.on('exit', function(code) {
@@ -399,6 +427,7 @@ gulp.task('default', ['clean'], function(cb) {
   // Uncomment 'cache-config' if you are going to use service workers.
   runSequence(
     'jekyllbuild',
+    'basicjekyllbuild',
     ['ensureFiles', 'copy', 'styles'],
     'elements',
     ['images', 'fonts', 'scripts', 'html'], //, 'html'

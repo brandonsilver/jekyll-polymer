@@ -1,0 +1,124 @@
+body {
+    font-size:16px;
+    font-family:"DejaVu Serif",serif;
+    /* color:#444; */
+}
+
+#sidebar {
+    float: left;
+    max-width: 150px;
+    font-family: "DejaVu Sans",sans;
+}
+
+#page { 
+    /*margin: 15px auto 15px 190px; */
+    margin: 15px auto 15px auto;
+    min-width: 400px;
+    max-width: 850px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+#page-content {
+    padding: 10px 0px 10px 0px;
+    max-width: 750px;
+    margin:0px auto 0px;
+}
+
+#header h1 {
+    /*line-height: 0;*/
+}
+
+#header h1 a:link {
+    color: black;
+}
+
+#header h1 a:visited {
+    color: black;
+}
+
+#header {
+    line-height: 0.0;
+    padding: 0px 0px 10px;
+}
+
+nav {
+    padding: 5px 0px 5px;
+    margin: 10px auto 20px;
+    border-top-style: dashed;
+    border-top-width: 2px;
+    border-bottom-style: dashed;
+    border-bottom-width: 2px;
+    font-family: "DejaVu Sans",sans-serif;
+    font-size: 14px;
+}
+
+.nav-label {
+    font-weight: 100;
+    font-style: italic;
+}
+
+#content {
+    line-height: 1.6; 
+    /* text-align: justify; */
+}
+
+#twitter-widget {
+    text-align: center;
+}
+
+.post_date {
+    color: grey;
+    padding-top: 20px;
+    font-size: 18px;
+    line-height: 0.0;
+}
+
+a:link {
+    /* color: black; */
+    text-decoration: none;
+}
+
+a:visited {
+    /* color: grey; */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+h1,h2 {
+    line-height:1.2
+}
+
+h3,h4 {
+    font-family: "DejaVu Sans",sans-serif;
+    line-height: 1.0;
+}
+
+h1 a:link, h2 a:link, h3 a:link, h4 a:link, nav a:link {
+    color: black;
+}
+
+h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited, nav a:visited {
+    color: grey;
+}
+
+pre {
+    font-family: "DejaVu Sans Mono",monospace;
+}
+
+.highlight {
+    font-size: 14px;
+}
+
+#footer {
+    border-top-style: dashed;
+    border-top-width: 2px;
+    font-size: 12px;
+    text-align: center;
+    padding: 20px 0px 0px;
+}

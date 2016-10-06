@@ -1,0 +1,16 @@
+---
+layout: default
+title: Blog Archives
+---
+
+<h2>Blog Post Archives</h2>
+{% for post in site.posts %}
+    <!--iterate through each post's excerpt-->
+    <span class="post_date"> {{ post.date | date: "%d %B %Y" }} </span>
+    <h3><a href=" {{ post.url }} "> {{ post.title }} </a></h3>
+    {{ post.content | postmorefilter: post.url, "&raquo;Read the rest of this post" }}
+
+    {% if forloop.index != forloop.length %}
+        <hr>
+    {% endif %}
+{% endfor %}

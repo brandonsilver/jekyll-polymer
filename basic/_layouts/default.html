@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="The personal website of Brandon Silver." />
+        <meta name="keywords" content="{{ page.tags | join: ',' }}" />
+        <title>{{ page.title }} | www.BrandonSilver.com</title>
+        {% assign hierarchy = page.url | split: "/" %}
+        {% assign relativeRoot = "" %}
+        {% for level in hierarchy reversed %}
+          {% if forloop.first == true %}
+          {% elsif forloop.last == true %}
+          {% else %}
+            {% assign relativeRoot = relativeRoot | append: "../" %}
+          {% endif %}
+        {% endfor %}
+        <link rel="stylesheet" href="{{ relativeRoot }}css/style.css" type="text/css" />
+        <link rel="stylesheet" href="{{ relativeRoot }}css/syntax.css" type="text/css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="page-content">
+            <div id="header"><h1><a href="http://www.brandonsilver.com/">www.BrandonSilver.com</a></h1>
+            ... writings and miscellaneous musings
+            </div>
+            <nav>
+              <span class="nav-label">This Website: </span><a href="{{ relativeRoot }}index.html">Home</a>
+              | <a href="{{ relativeRoot }}about.html">About</a>
+              | <a href="{{ relativeRoot }}links.html">Useful Links</a>
+            </nav>
+            <div id="content">
+                {{ content}}
+            </div>
+            <div id="twitter-widget">
+            </div>
+            <div id="footer"><strong>Copyright &copy; 2010-2015 <a href="https://www.brandonsilver.com/">Brandon Silver</a></strong> | Last updated on <strong> {{ site.time }} </strong></div>
+            </div>
+        </div>
+    </body>
+</html>
